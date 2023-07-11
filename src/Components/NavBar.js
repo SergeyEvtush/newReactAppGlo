@@ -31,8 +31,10 @@ const EnterButton = styled.button`
 background: #299B20;
 line-height:2;
 font-size: 20px;
+font-family:Pacifico;
 cursor: pointer;
 border-radius:10px;
+
 `;
 export const NavBar = () => (
 	<NavBarStyled>
