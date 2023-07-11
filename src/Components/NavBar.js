@@ -38,7 +38,7 @@ export const NavBar = () => (
 	<NavBarStyled>
 		<Logo>
 			<ImgLogo src={logoImg} alt="logo" />
-			<H1>Shavuha</H1>
+			
 			</Logo>
 		<EnterButton>Enter</EnterButton>
 	</NavBarStyled>
