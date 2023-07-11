@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import logoImg from '../image/logo.svg';
+import ButtonImg from '../image/sign.svg';
+
 const NavBarStyled = styled.header`
 position:fixed;
 top:0;
@@ -16,6 +18,8 @@ background-color: #299B01;
 color:#fff;
 `;
 
+
+
 const Logo = styled.div`
 display:flex;
 align-items:center;
@@ -25,23 +29,35 @@ font-size:24px;
 margin-left: 15px;
 `;
 const ImgLogo = styled.img`
-width: 50px;
+width:${(props)=>(props.logo?"50px":"32px")};
 `;
 const EnterButton = styled.button`
-background: #299B20;
-line-height:2;
-font-size: 20px;
-font-family:Pacifico;
-cursor: pointer;
-border-radius:10px;
+background-color:#299B01;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+color: #FFF;
+border:none;
+`;
+const Sign = styled.div`
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+align-items:center;
 
 `;
+
+
 export const NavBar = () => (
 	<NavBarStyled>
 		<Logo>
-			<ImgLogo src={logoImg} alt="logo" />
+			<ImgLogo logo src={logoImg} alt="logo" />
 			<H1>Shavuha</H1>
-			</Logo>
-		<EnterButton>Enter</EnterButton>
+		</Logo>
+		<Sign>
+			<ImgLogo src={ButtonImg} alt="sign" />
+			<EnterButton>войти</EnterButton>
+		</Sign>
 	</NavBarStyled>
 );
