@@ -20,7 +20,7 @@ color:#fff;
 
 
 
-const Logo = styled.div`
+const LogoType = styled.div`
 display:flex;
 align-items:center;
 `;
@@ -51,10 +51,10 @@ align-items:center;
 
 export const NavBar = () => (
 	<NavBarStyled>
-		<Logo>
-			<ImgLogo logo src={logoImg} alt="logo" />
+		<LogoType>
+			<ImgLogo logo="true" src={logoImg} alt="logo" />
 			<H1>Shavuha</H1>
-		</Logo>
+		</LogoType>
 		<Sign>
 			<ImgLogo src={ButtonImg} alt="sign" />
 			<EnterButton>войти</EnterButton>
