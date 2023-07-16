@@ -1,7 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
-
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
 html{box-sizing:border-box};
 
 *,
@@ -44,4 +43,5 @@ button{
 input,button{
 	font-family:inherit;
 }
-`;
+`
+export default GlobalStyle

@@ -1,18 +1,21 @@
-import React from 'react';
-import {GlobalStyle} from './Components/GlobalStyle';
-import { NavBar } from './Components/NavBar';
-import { Menu } from './Components/Menu';
-
-
-
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable no-unused-vars */
+import React from "react";
+import GlobalStyle from "./Components/GlobalStyle";
+import { NavBar } from "./Components/NavBar";
+import { Menu } from "./Components/Menu";
+import { ModalItem } from "./Components/ModalItem";
 
 function App() {
-	return (
-	  <>
-			<GlobalStyle/>
-			<NavBar />
-			<Menu />
-		</>
+  const [openItem, setOpenItem] = React.useState(null);
+
+  return (
+    <>
+      <GlobalStyle />
+      <NavBar />
+      <Menu setOpenItem={setOpenItem} />
+      <ModalItem openItem={openItem} setOpenItem={setOpenItem} />
+    </>
   );
 }
 

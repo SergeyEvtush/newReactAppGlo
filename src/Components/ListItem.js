@@ -1,61 +1,61 @@
-import React from 'react';
-import styled from 'styled-components';
-
+import React from "react";
+import styled from "styled-components";
 
 const List = styled.ul`
-display:flex;
-justify-content:space-around;
-align-items:center;
-flex-wrap:wrap;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
 `;
-
 
 const Item = styled.li`
-position:relative;
-font-size:30px;
-width: 400px;
-height: 155px;
-background-image: ${({ img }) => `url(${img})`};
-background-position:center;
-background-size:cover;
-margin-top: 30px;
-margin-right: 30px;
-padding: 15px;
-color:#fff;
-z-index:1;
-transition:all 0.3s ease-in-out 0.3s;
-&:after{
-	content:'';
-	position:absolute;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
-	background-color:black;
-	opacity: 50%;
-	z-index: -1;
-	transition:all 0.3s ease-in-out 0.3s;
-}
-&:hover{
-	cursor:pointer;
-	box-shadow:inset 0 0 50px 30px rgba(0,0,0,1);
-	transition:all 0.3s ease-in-out 0.3s;
-&:after{
-	opacity: 0;
-}
-}
+  position: relative;
+  font-size: 30px;
+  width: 400px;
+  height: 155px;
+  background-image: ${({ img }) => `url(${img})`};
+  background-position: center;
+  background-size: cover;
+  margin-top: 30px;
+  margin-right: 30px;
+  padding: 15px;
+  color: #fff;
+  z-index: 1;
+  transition: all 0.3s ease-in-out 0.3s;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: black;
+    opacity: 50%;
+    z-index: -1;
+    transition: all 0.3s ease-in-out 0.3s;
+  }
+  &:hover {
+    cursor: pointer;
+    box-shadow: inset 0 0 50px 30px rgba(0, 0, 0, 1);
+    transition: all 0.3s ease-in-out 0.3s;
+    &:after {
+      opacity: 0;
+    }
+  }
 `;
 
-export const ListItem = ({ itemList}) => (
-	<List>
-		{itemList.map(item => (
-			<Item key={item.id}
-				img={item.img}>
-				<p>{item.name}</p>
-				<p>{item.price.toLocaleString('ri-RU', {style:'currency',currency:'RUB'})}</p>
-
-			</Item>
-		))}
-	</List>
-
-)
+export const ListItem = ({ itemList, setOpenItem }) => (
+  <List>
+    {itemList.map((item) => (
+      <Item key={item.id} img={item.img} onClick={() => setOpenItem(item)}>
+        <p>{item.name}</p>
+        <p>
+          {item.price.toLocaleString("ri-RU", {
+            style: "currency",
+            currency: "RUB",
+          })}
+        </p>
+      </Item>
+    ))}
+  </List>
+);
