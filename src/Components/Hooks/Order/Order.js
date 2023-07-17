@@ -2,6 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { AddButton } from "../Style/Button";
 import { OrderListItem } from "./OrderListItem";
+import {
+  returnRubbles,
+  totalPriceItems,
+} from "../../functions/secondaryFunctions";
 
 const OrderStyled = styled.section`
   position: fixed;
@@ -45,6 +49,8 @@ const TotalPrice = styled.span`
 `;
 
 export const Order = ({ orders }) => {
+  const total = orders.reduce((res, item) => totalPriceItems(item) + res, 0);
+
   return (
     <>
       <OrderStyled>
@@ -52,8 +58,8 @@ export const Order = ({ orders }) => {
         <OrderContent>
           {orders.length ? (
             <OrderList>
-              {orders.map((key) => (
-                <OrderListItem order={key} id={key} />
+              {orders.map((order, pos) => (
+                <OrderListItem order={order} key={pos} />
               ))}
             </OrderList>
           ) : (
@@ -63,7 +69,7 @@ export const Order = ({ orders }) => {
         <Total>
           <span>Итого</span>
           <span>5</span>
-          <TotalPrice>850</TotalPrice>
+          <TotalPrice>{returnRubbles(total)}</TotalPrice>
         </Total>
         <AddButton>Оформить</AddButton>
       </OrderStyled>
