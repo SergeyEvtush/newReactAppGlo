@@ -1,7 +1,7 @@
-import React from "react";
 import styled from "styled-components";
 
-const AddButton = styled.button`
+export const AddButton = styled.button`
+  display: block;
   width: 250px;
   height: 65px;
   font-size: 21px;
@@ -18,9 +18,3 @@ const AddButton = styled.button`
     border-color: #299b01;
   }
 `;
-
-export const Button = ({ buttonText }) => (
-  <>
-    <AddButton>{buttonText}</AddButton>
-  </>
-);

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Button } from "./Button";
+import { AddButton } from "../Style/Button";
 
 const Overlay = styled.div`
   position: fixed;
@@ -51,17 +51,20 @@ const ContentBanner = styled.div`
   justify-content: space-between;
 `;
 
-export const ModalItem = ({ openItem, setOpenItem }) => {
-  function closeModal(e) {
+export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
+  const closeModal = (e) => {
     if (e.target.id === "overlay") {
       setOpenItem(null);
     }
-  }
+  };
 
-  if (!openItem) {
-    return null;
-  }
-
+  const addToOrder = () => {
+    setOrders([...orders, order]);
+    setOpenItem(null);
+  };
+  const order = {
+    ...openItem,
+  };
   return (
     <Overlay id="overlay" onClick={closeModal}>
       <Modal>
@@ -76,7 +79,7 @@ export const ModalItem = ({ openItem, setOpenItem }) => {
               })}
             </TitleBannerParagraph>
           </TitleBanner>
-          <Button buttonText="Добавить" />
+          <AddButton onClick={addToOrder}>Добавить</AddButton>
         </ContentBanner>
       </Modal>
     </Overlay>

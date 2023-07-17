@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import dbMenu from "./DBMenu";
-import { ListItem } from "./ListItem";
+import dbMenu from "../../DBMenu";
+import { ListItem } from ".././Order/ListItem";
 import { Banner } from "./Banner";
 
 const SectionMenu = styled.section`

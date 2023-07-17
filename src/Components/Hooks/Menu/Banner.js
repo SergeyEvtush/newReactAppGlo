@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import styled from "styled-components";
-import BannerImage from "../image/banner.png";
+import BannerImage from "../../../image/banner.png";
 
 const StyledDiv = styled.div`
   max-width: 100vw;
