@@ -11,6 +11,7 @@ const SectionMenu = styled.section`
 const MenuStyled = styled.main`
   background-color: #ccc;
   margin-top: 80px;
+  margin-left: 380px;
 `;
 
 export const Menu = ({ setOpenItem }) => (
