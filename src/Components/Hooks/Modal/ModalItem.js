@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { AddButton } from "../Style/Button";
 import { CountItem } from "./CountItem";
 import { useCount } from "../useCount";
+import { Toppings } from "./Topppings";
+import { useToppings } from "../useTopping";
+
 import {
   returnRubbles,
   totalPriceItems,
@@ -64,6 +67,7 @@ const TotalPriceItem = styled.div`
 
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
   const counter = useCount();
+  const toppings = useToppings(openItem);
 
   const closeModal = (e) => {
     if (e.target.id === "overlay") {
@@ -78,6 +82,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
   const order = {
     ...openItem,
     count: counter.count,
+    topping: toppings.toppings,
   };
 
   return (
@@ -92,10 +97,12 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
             </TitleBannerParagraph>
           </TitleBanner>
           <CountItem {...counter} />
+          {openItem.toppings && <Toppings {...toppings} />}
           <TotalPriceItem>
             <span>Цена:</span>
             <span>{returnRubbles(totalPriceItems(order))}</span>
           </TotalPriceItem>
+
           <AddButton onClick={addToOrder}>Добавить</AddButton>
         </ContentBanner>
       </Modal>

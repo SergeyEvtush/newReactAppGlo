@@ -31,11 +31,19 @@ const ItemPrice = styled.span`
   text-align: right;
 `;
 
-export const OrderListItem = ({ order }) => (
-  <OrderItemStyled id={order.id}>
-    <ItemName>{order.name}</ItemName>
-    <span>{order.count}</span>
-    <ItemPrice>{returnRubbles(totalPriceItems(order))}</ItemPrice>
-    <TrashButton></TrashButton>
-  </OrderItemStyled>
-);
+export const OrderListItem = ({ order }) => {
+  return (
+    <>
+      <OrderItemStyled id={order.id}>
+        <ItemName>{order.name}</ItemName>
+        <span>{order.count}</span>
+        <ItemPrice>{returnRubbles(totalPriceItems(order))}</ItemPrice>
+        <TrashButton></TrashButton>
+      </OrderItemStyled>
+      {order.topping &&
+        order.topping.map((item, i) =>
+          item.checked === true ? <div key={i}>{item.name}</div> : !(<></>)
+        )}
+    </>
+  );
+};

@@ -50,6 +50,7 @@ const TotalPrice = styled.span`
 
 export const Order = ({ orders }) => {
   const total = orders.reduce((res, item) => totalPriceItems(item) + res, 0);
+  const totalCounter = orders.reduce((res, item) => item.count + res, 0);
 
   return (
     <>
@@ -68,7 +69,7 @@ export const Order = ({ orders }) => {
         </OrderContent>
         <Total>
           <span>Итого</span>
-          <span>5</span>
+          <span>{totalCounter}</span>
           <TotalPrice>{returnRubbles(total)}</TotalPrice>
         </Total>
         <AddButton>Оформить</AddButton>
