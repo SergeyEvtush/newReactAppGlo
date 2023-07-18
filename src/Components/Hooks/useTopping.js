@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 const getTopping = (toppings) => {
-  if (toppings !== null && toppings !== "undefined") {
+  if (!!toppings) {
+    console.log(toppings);
     return toppings.map((item) => ({
       name: item,
       checked: false,
     }));
   } else {
-    return;
+    return null;
   }
 };
 

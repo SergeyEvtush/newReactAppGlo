@@ -7,7 +7,7 @@ import {
 } from "../../functions/secondaryFunctions";
 const OrderItemStyled = styled.li`
   display: flex;
-  margin: 15px 0px;
+  margin: 0px 0px;
 `;
 
 const TrashButton = styled.button`
@@ -30,6 +30,11 @@ const ItemPrice = styled.span`
   min-width: 65px;
   text-align: right;
 `;
+const ToppingContent = styled.p`
+  font-size: 14px;
+  color: #9a9a9a;
+  line-height: 1.41;
+`;
 
 export const OrderListItem = ({ order }) => {
   return (
@@ -40,10 +45,15 @@ export const OrderListItem = ({ order }) => {
         <ItemPrice>{returnRubbles(totalPriceItems(order))}</ItemPrice>
         <TrashButton></TrashButton>
       </OrderItemStyled>
-      {order.topping &&
-        order.topping.map((item, i) =>
-          item.checked === true ? <div key={i}>{item.name}</div> : !(<></>)
-        )}
+      <ToppingContent>
+        {order.topping &&
+          order.topping
+            .map(
+              (item, i) =>
+                item.checked === true && `${item.name.toLowerCase()} `
+            )
+            .join(",")}
+      </ToppingContent>
     </>
   );
 };
