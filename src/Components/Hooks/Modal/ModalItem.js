@@ -4,7 +4,9 @@ import { AddButton } from "../Style/Button";
 import { CountItem } from "./CountItem";
 import { useCount } from "../useCount";
 import { Toppings } from "./Topppings";
+import { Choices } from "./Choises";
 import { useToppings } from "../useTopping";
+import { useChoices } from "../useChoises";
 
 import {
   returnRubbles,
@@ -68,6 +70,7 @@ const TotalPriceItem = styled.div`
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
   const counter = useCount();
   const toppings = useToppings(openItem);
+  const choices = useChoices();
 
   const closeModal = (e) => {
     if (e.target.id === "overlay") {
@@ -83,6 +86,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
     ...openItem,
     count: counter.count,
     topping: toppings.toppings,
+    choice: choices.choice,
   };
 
   return (
@@ -98,12 +102,17 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
           </TitleBanner>
           <CountItem {...counter} />
           {openItem.toppings && <Toppings {...toppings} />}
+          {openItem.choices && <Choices {...choices} openItem={openItem} />}
           <TotalPriceItem>
             <span>Цена:</span>
             <span>{returnRubbles(totalPriceItems(order))}</span>
           </TotalPriceItem>
-
-          <AddButton onClick={addToOrder}>Добавить</AddButton>
+          <AddButton
+            onClick={addToOrder}
+            disabled={order.choices && !order.choice}
+          >
+            Добавить
+          </AddButton>
         </ContentBanner>
       </Modal>
     </Overlay>

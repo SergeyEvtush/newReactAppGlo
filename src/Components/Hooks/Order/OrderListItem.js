@@ -36,14 +36,16 @@ const ToppingContent = styled.p`
   line-height: 1.41;
 `;
 
-export const OrderListItem = ({ order }) => {
+export const OrderListItem = ({ order, index, deleteItem }) => {
   return (
     <>
       <OrderItemStyled id={order.id}>
-        <ItemName>{order.name}</ItemName>
+        <ItemName>
+          {order.name} {order.choice}
+        </ItemName>
         <span>{order.count}</span>
         <ItemPrice>{returnRubbles(totalPriceItems(order))}</ItemPrice>
-        <TrashButton></TrashButton>
+        <TrashButton onClick={() => deleteItem(index)}></TrashButton>
       </OrderItemStyled>
       <ToppingContent>
         {order.topping &&

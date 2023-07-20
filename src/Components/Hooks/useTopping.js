@@ -2,7 +2,6 @@ import { useState } from "react";
 
 const getTopping = (toppings) => {
   if (!!toppings) {
-    console.log(toppings);
     return toppings.map((item) => ({
       name: item,
       checked: false,

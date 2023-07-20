@@ -48,10 +48,14 @@ const TotalPrice = styled.span`
   margin-left: 20px;
 `;
 
-export const Order = ({ orders }) => {
+export const Order = ({ orders, setOrders }) => {
   const total = orders.reduce((res, item) => totalPriceItems(item) + res, 0);
   const totalCounter = orders.reduce((res, item) => item.count + res, 0);
-
+  const deleteItem = (index) => {
+    const newOrders = [...orders];
+    newOrders.splice(index, 1);
+    setOrders(newOrders);
+  };
   return (
     <>
       <OrderStyled>
@@ -60,7 +64,12 @@ export const Order = ({ orders }) => {
           {orders.length ? (
             <OrderList>
               {orders.map((order, pos) => (
-                <OrderListItem order={order} key={pos} />
+                <OrderListItem
+                  order={order}
+                  deleteItem={deleteItem}
+                  key={pos}
+                  index={pos}
+                />
               ))}
             </OrderList>
           ) : (
