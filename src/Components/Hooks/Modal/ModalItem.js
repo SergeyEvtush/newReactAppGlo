@@ -68,9 +68,10 @@ const TotalPriceItem = styled.div`
 `;
 
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
-  const counter = useCount();
+  const counter = useCount(openItem.count);
   const toppings = useToppings(openItem);
   const choices = useChoices();
+  const isEdit = openItem.index > -1;
 
   const closeModal = (e) => {
     if (e.target.id === "overlay") {
@@ -80,6 +81,13 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
   const addToOrder = () => {
     setOrders([...orders, order]);
+    setOpenItem(null);
+  };
+
+  const editOrder = () => {
+    const newOrders = [...orders];
+    newOrders[openItem.index] = order;
+    setOrders(newOrders);
     setOpenItem(null);
   };
   const order = {
@@ -108,10 +116,10 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
             <span>{returnRubbles(totalPriceItems(order))}</span>
           </TotalPriceItem>
           <AddButton
-            onClick={addToOrder}
+            onClick={isEdit ? editOrder : addToOrder}
             disabled={order.choices && !order.choice}
           >
-            Добавить
+            {isEdit ? "Редактировать" : "Добавить"}
           </AddButton>
         </ContentBanner>
       </Modal>

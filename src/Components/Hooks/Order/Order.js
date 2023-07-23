@@ -48,7 +48,7 @@ const TotalPrice = styled.span`
   margin-left: 20px;
 `;
 
-export const Order = ({ orders, setOrders }) => {
+export const Order = ({ orders, setOrders, setOpenItem }) => {
   const total = orders.reduce((res, item) => totalPriceItems(item) + res, 0);
   const totalCounter = orders.reduce((res, item) => item.count + res, 0);
   const deleteItem = (index) => {
@@ -69,6 +69,7 @@ export const Order = ({ orders, setOrders }) => {
                   deleteItem={deleteItem}
                   key={pos}
                   index={pos}
+                  setOpenItem={setOpenItem}
                 />
               ))}
             </OrderList>

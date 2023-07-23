@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import trashImage from "../../../image/trash.svg";
 import {
@@ -22,6 +22,7 @@ const TrashButton = styled.button`
 `;
 
 const ItemName = styled.span`
+  cursor: pointer;
   flex-grow: 1;
 `;
 const ItemPrice = styled.span`
@@ -34,18 +35,30 @@ const ToppingContent = styled.p`
   font-size: 14px;
   color: #9a9a9a;
   line-height: 1.41;
+  cursor: pointer;
 `;
 
-export const OrderListItem = ({ order, index, deleteItem }) => {
+export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
+  const refDeleteButton = useRef(null);
+
   return (
     <>
-      <OrderItemStyled id={order.id}>
+      <OrderItemStyled
+        id={order.id}
+        onClick={(e) => {
+          e.target !== refDeleteButton.current &&
+            setOpenItem({ ...order, index });
+        }}
+      >
         <ItemName>
           {order.name} {order.choice}
         </ItemName>
         <span>{order.count}</span>
         <ItemPrice>{returnRubbles(totalPriceItems(order))}</ItemPrice>
-        <TrashButton onClick={() => deleteItem(index)}></TrashButton>
+        <TrashButton
+          onClick={() => deleteItem(index)}
+          ref={refDeleteButton}
+        ></TrashButton>
       </OrderItemStyled>
       <ToppingContent>
         {order.topping &&
