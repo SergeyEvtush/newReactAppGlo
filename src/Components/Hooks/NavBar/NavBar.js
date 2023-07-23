@@ -44,16 +44,40 @@ const Sign = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+const User = styled.div`
+  display: flex;
+  align-items: center;
+  text-align: center;
+`;
+const LogOut = styled.span`
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 30px;
+`;
 
-export const NavBar = () => (
+export const NavBar = ({ authentification, logIn, logOut }) => (
   <NavBarStyled>
     <LogoType>
       <ImgLogo logo="true" src={logoImg} alt="logo" />
       <H1>Shavuha</H1>
     </LogoType>
-    <Sign>
-      <ImgLogo src={ButtonImg} alt="sign" />
-      <EnterButton>войти</EnterButton>
-    </Sign>
+
+    {authentification ? (
+      <User>
+        <figure>
+          <ImgLogo src={ButtonImg} alt={authentification.displayName} />
+          <figcaption>{authentification.displayName}</figcaption>
+        </figure>
+        <LogOut title="Выйти" onClick={logOut}>
+          Выйти
+        </LogOut>
+      </User>
+    ) : (
+      <Sign onClick={logIn}>
+        <ImgLogo src={ButtonImg} alt="sign" />
+        <EnterButton>войти</EnterButton>
+      </Sign>
+    )}
   </NavBarStyled>
 );

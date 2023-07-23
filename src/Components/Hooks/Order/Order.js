@@ -48,9 +48,24 @@ const TotalPrice = styled.span`
   margin-left: 20px;
 `;
 
-export const Order = ({ orders, setOrders, setOpenItem }) => {
+export const Order = ({
+  orders,
+  setOrders,
+  setOpenItem,
+  authentification,
+  logIn,
+}) => {
   const total = orders.reduce((res, item) => totalPriceItems(item) + res, 0);
   const totalCounter = orders.reduce((res, item) => item.count + res, 0);
+
+  const checkUser = () => {
+    if (authentification === null) {
+      logIn();
+    } else {
+      console.log(orders);
+    }
+  };
+
   const deleteItem = (index) => {
     const newOrders = [...orders];
     newOrders.splice(index, 1);
@@ -82,7 +97,7 @@ export const Order = ({ orders, setOrders, setOpenItem }) => {
           <span>{totalCounter}</span>
           <TotalPrice>{returnRubbles(total)}</TotalPrice>
         </Total>
-        <AddButton>Оформить</AddButton>
+        <AddButton onClick={checkUser}>Оформить</AddButton>
       </OrderStyled>
     </>
   );
