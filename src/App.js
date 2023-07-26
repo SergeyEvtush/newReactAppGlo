@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
 import GlobalStyle from "./Components/Hooks/Style/GlobalStyle";
 import { NavBar } from "./Components/Hooks/NavBar/NavBar";
 import { Menu } from "./Components/Hooks/Menu/Menu";
@@ -30,7 +31,12 @@ function App() {
     <>
       <GlobalStyle />
       <NavBar {...auth} />
-      <Order {...orders} {...openItem} {...auth} />
+      <Order
+        {...orders}
+        {...openItem}
+        {...auth}
+        firebaseDataBase={getDatabase}
+      />
       <Menu {...openItem} />
       {openItem.openItem && <ModalItem {...openItem} {...orders} />}
     </>

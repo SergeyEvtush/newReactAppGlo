@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { ref, set } from "firebase/database";
 import { AddButton } from "../Style/Button";
 import { OrderListItem } from "./OrderListItem";
 import {
   returnRubbles,
   totalPriceItems,
+  projection,
 } from "../../functions/secondaryFunctions";
 
 const OrderStyled = styled.section`
@@ -48,21 +50,50 @@ const TotalPrice = styled.span`
   margin-left: 20px;
 `;
 
+const rulesData = {
+  name: ["name"],
+  price: ["price"],
+  count: ["count"],
+  topping: [
+    "topping",
+    (arr) =>
+      arr.length > 0
+        ? arr.filter((item) => item.checked === true).map((el) => el.name)
+        : "no toppings",
+  ],
+  choice: ["choices", (item) => (item ? item : "no choices")],
+};
+
 export const Order = ({
   orders,
   setOrders,
   setOpenItem,
   authentification,
   logIn,
+  firebaseDataBase,
 }) => {
   const total = orders.reduce((res, item) => totalPriceItems(item) + res, 0);
   const totalCounter = orders.reduce((res, item) => item.count + res, 0);
+  const dataBase = firebaseDataBase();
+  const sendOrder = () => {
+    const newOrder = orders.map(projection(rulesData));
+    set(ref(dataBase, "orders"), {
+      username: authentification.displayName,
+      email: authentification.email,
+      order: newOrder,
+    });
+    /*  dataBase.ref("orders").push().set({
+      name: authentification.displayName,
+      email: authentification.email,
+      order: newOrder,
+    }); */
+  };
 
   const checkUser = () => {
     if (authentification === null) {
       logIn();
     } else {
-      console.log(orders);
+      sendOrder();
     }
   };
 
